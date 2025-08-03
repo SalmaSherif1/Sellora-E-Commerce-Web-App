@@ -1,0 +1,133 @@
+<div class="overflow-x-auto">
+    <h1 class="text-center  text-4xl font-bold italic my-7 sp">
+        {{ 'cart.title' | translate }}
+    </h1>
+
+    @if (cartDetails.totalCartPrice) {
+    <button
+        class="text-md bg-red-700 hover:bg-red-900 transition text-white rounded px-6 block ms-auto me-5 md:me-0 py-1 cursor-pointer my-4"
+        (click)="ClearCart()">
+        {{ 'cart.clear' | translate }}
+    </button>
+
+    <table class="cartbg min-w-full hidden md:table border-separate border-spacing-y-4">
+        <thead>
+            <tr class="text-left text-[#003F3F] text-sm border-b">
+                <th class="p-2">{{ 'cart.table.item' | translate }}</th>
+                <th class="p-2">{{ 'cart.table.price' | translate }}</th>
+                <th class="p-2">{{ 'cart.table.quantity' | translate }}</th>
+                <th class="p-2">{{ 'cart.table.total' | translate }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of cartDetails.products; track item.product._id) {
+            <tr>
+                <td class="flex gap-4 p-2">
+                    <img [src]="item.product.imageCover" alt="product" class="w-24 h-24 object-cover rounded" />
+                    <div>
+                        <h4 class="font-semibold">{{ item.product.title }}</h4>
+                        <p class="text-gray-600">{{ item.product.category.name }}</p>
+                    </div>
+                </td>
+
+                <td class="p-2 align-top">${{ item.price.toFixed(2) }}</td>
+
+                <td class="p-2 align-top">
+                    <div class="flex items-center gap-2 border border-[#003F3F] rounded px-2 py-1 w-fit">
+                        <button (click)="UpdateCartProductQuantity(item.product._id, item.count - 1)"
+                            class="text-lg cursor-pointer">−</button>
+                        <span>{{ item.count }}</span>
+                        <button (click)="UpdateCartProductQuantity(item.product._id, item.count + 1)"
+                            class="text-lg cursor-pointer">+</button>
+                    </div>
+                </td>
+
+                <td class="p-2 align-top font-medium">
+                    ${{ (item.price * item.count).toFixed(2) }}
+                </td>
+
+                <td class="p-2 align-top">
+                    <button (click)="removeCartItem(item.product._id)">
+                        <i class="fas fa-trash-can text-green-600 cursor-pointer"></i>
+                    </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+
+    <!-- For small screens (card layout) -->
+    <div class="md:hidden flex flex-col gap-4 px-4">
+        @for (item of cartDetails.products; track item.product._id) {
+        <div class="border border-gray-200 p-3 rounded-lg flex flex-col gap-3 shadow-sm bg-white">
+            <div class="flex gap-3 items-center">
+                <img [src]="item.product.imageCover" alt="product" class="w-16 h-16 object-cover rounded" />
+                <div class="flex-1">
+                    <h4 class="text-sm font-semibold">{{ item.product.title }}</h4>
+                    <p class="text-xs text-gray-500">{{ item.product.category.name }}</p>
+                </div>
+                <button (click)="removeCartItem(item.product._id)">
+                    <i class="fas fa-trash-can text-green-600"></i>
+                </button>
+            </div>
+
+            <div class="text-sm text-[#003F3F] flex justify-between">
+                <span>{{ 'cart.table.price' | translate }}:</span>
+                <span>${{ item.price.toFixed(2) }}</span>
+            </div>
+
+            <div class="text-sm text-[#003F3F] flex justify-between items-center">
+                <span>{{ 'cart.table.quantity' | translate }}:</span>
+                <div class="flex items-center gap-2 border rounded px-2 py-1">
+                    <button (click)="UpdateCartProductQuantity(item.product._id, item.count - 1)">−</button>
+                    <span>{{ item.count }}</span>
+                    <button (click)="UpdateCartProductQuantity(item.product._id, item.count + 1)">+</button>
+                </div>
+            </div>
+
+            <div class="text-sm font-semibold text-[#003F3F] flex justify-between">
+                <span>{{ 'cart.table.total' | translate }}:</span>
+                <span>${{ (item.price * item.count).toFixed(2) }}</span>
+            </div>
+        </div>
+        }
+    </div>
+
+    <hr class="my-6 border-[#003F3F]" />
+
+    <div class="flex items-center justify-center my-5 px-4">
+        <div class="w-full cartbg lg:w-1/2 p-4 rounded shadow-md h-fit items-center">
+            <div class="space-y-4 text-lg text-[#003F3F]">
+                <div class="flex justify-between">
+                    <span>{{ 'cart.subtotal' | translate }}</span>
+                    <span>${{ cartDetails.totalCartPrice.toFixed(2) }}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>{{ 'cart.shipping' | translate }}</span>
+                    <div>
+                        <span class="text-gray-500 text-sm ml-1">Free Shipping</span>
+                    </div>
+                </div>
+                <div class="flex justify-between font-semibold border-t pt-2">
+                    <span>{{ 'cart.grandTotal' | translate }}</span>
+                    <span>${{ (cartDetails.totalCartPrice).toFixed(2) }}</span>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-center w-full">
+                <button [routerLink]="['/checkout', cartDetails._id]"
+                    class="w-3/4 mt-6 py-3 rounded-lg bg-green-500 hover:bg-green-700 text-white uppercase text-md font-medium cursor-pointer transition">
+                    {{ 'cart.checkout' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    } @else {
+    <h3 class="text-2xl text-[#003F3F] text-center italic my-10 fade-in">
+        {{ 'cart.empty' | translate }}
+    </h3>
+    }
+</div>

@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+
+@plugin "flowbite/plugin";
+
+@source "../node_modules/flowbite";
+
+* {
+    font-family: "Playfair Display", serif;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.animate__animated.animate__bounce {
+    --animate-duration: 1.2s;
+}
+
+.cartbg {
+    background: #B2FCDE;
+    background: linear-gradient(142deg, rgba(178, 252, 222, 1) 0%, rgba(203, 242, 213, 1) 100%);
+}
+
+.shadow-bottom {
+    box-shadow: 0 4px 8px 3px rgb(178, 252, 222);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+.sp {
+
+    background-clip: text;
+    background: #A552CB;
+    background: linear-gradient(to top, #A552CB 20%, #007272 55%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.spe {
+    background: #007272;
+    background: linear-gradient(142deg, rgba(0, 114, 114, 1) 34%, rgba(165, 82, 203, 1) 100%);
+}

@@ -1,0 +1,62 @@
+<section class="w-3/4 md:w-1/2 bg-gray-100 shadow-lg rounded-lg mx-auto p-5 my-3 mt-14 md:mt-3">
+    <h1 class="text-center  text-3xl font-bold italic sp my-6 md:my-0">
+        {{ 'checkout.title' | translate }}
+    </h1>
+
+    <form [formGroup]="paymentForm" (ngSubmit)="submitForm()">
+        <div class="mb-6">
+            <label for="details" class="block mb-2 text-md font-medium text-green-600">
+                {{ 'checkout.detailsLabel' | translate }}
+            </label>
+            <input placeholder="{{ 'checkout.detailsPlaceholder' | translate }}" type="text" id="details"
+                formControlName="details"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5" />
+        </div>
+
+        <div class="mb-6">
+            <label for="phone" class="block mb-2 text-md font-medium text-green-600">
+                {{ 'checkout.phoneLabel' | translate }}
+            </label>
+            <input placeholder="{{ 'checkout.phonePlaceholder' | translate }}" type="tel" id="phone"
+                formControlName="phone"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5" />
+        </div>
+
+        <div class="mb-6">
+            <label for="city" class="block mb-2 text-md font-medium text-green-600">
+                {{ 'checkout.cityLabel' | translate }}
+            </label>
+            <input placeholder="{{ 'checkout.cityPlaceholder' | translate }}" type="text" id="city"
+                formControlName="city"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5" />
+        </div>
+
+        <div class="mb-6">
+            <label class="block mb-2 text-md font-medium text-green-600">
+                {{ 'checkout.paymentMethodLabel' | translate }}
+            </label>
+            <div class="flex gap-6">
+                <label class="inline-flex items-center cursor-pointer">
+                    <input type="radio" formControlName="paymentMethod" value="card" class="sr-only peer" />
+                    <div
+                        class="w-5 h-5 rounded-full border-2 border-green-600 peer-checked:bg-green-600 peer-checked:ring-2 peer-checked:ring-green-300 transition">
+                    </div>
+                    <span class="ml-2 text-gray-700">{{ 'checkout.payNow' | translate }}</span>
+                </label>
+
+                <label class="inline-flex items-center cursor-pointer">
+                    <input type="radio" formControlName="paymentMethod" value="cash" class="sr-only peer" />
+                    <div
+                        class="w-5 h-5 rounded-full border-2 border-green-600 peer-checked:bg-green-600 peer-checked:ring-2 peer-checked:ring-green-300 transition">
+                    </div>
+                    <span class="ml-2 text-gray-700">{{ 'checkout.cashOnDelivery' | translate }}</span>
+                </label>
+            </div>
+        </div>
+
+        <button [disabled]="paymentForm.invalid"
+            class="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded-lg cursor-pointer transition text-left block disabled:bg-green-400 disabled:cursor-default">
+            {{ 'checkout.submit' | translate }}
+        </button>
+    </form>
+</section>

@@ -1,0 +1,101 @@
+<nav class="bg-[#B2FCDE] italic border-gray-200 fixed top-0 right-0 left-0  z-50">
+    <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <a routerLink="home" class="flex items-center w-[175px] space-x-3 rtl:space-x-reverse">
+            <img src="/images/logoSellora.png" alt="" class="w-full">
+        </a>
+        <button data-collapse-toggle="navbar-default" type="button"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default" aria-expanded="false">
+            <span class="sr-only">{{ 'navbar.openMenu' | translate }}</span>
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M1 1h15M1 7h15M1 13h15" />
+            </svg>
+        </button>
+        <div class="hidden w-full md:flex flex-grow justify-between items-center md:w-auto" id="navbar-default">
+            <ul
+                class="capitalize ml-5 font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 dark:border-gray-700">
+
+                @if (IsLoggedIn()) {<li>
+                    <a class="block py-2 px-3 text-gray-600 rounded-sm md:p-1 hover:underline hover:underline-offset-[10px] transition"
+                        routerLink="home" routerLinkActive="underline underline-offset-[10px]" aria-current="page">{{
+                        'navbar.home' | translate }}</a>
+                </li>
+                <li> <a class="block py-2 px-3 text-gray-600 rounded-sm md:p-1 hover:underline hover:underline-offset-[10px] transition"
+                        routerLink="cart" routerLinkActive="underline underline-offset-[10px]" aria-current="page">{{
+                        'navbar.cart' | translate }}</a>
+                </li>
+                <li> <a class=" block py-2 px-3 text-gray-600 rounded-sm md:p-1 hover:underline hover:underline-offset-[10px] transition"
+                        routerLink="products" routerLinkActive="underline underline-offset-[10px] "
+                        aria-current="page">{{ 'navbar.products' | translate }}</a>
+                </li>
+                <li> <a class="block py-2 px-3 text-gray-600 rounded-sm md:p-1 hover:underline hover:underline-offset-[10px] transition"
+                        routerLink="categories" routerLinkActive="underline underline-offset-[10px] "
+                        aria-current="page">{{ 'navbar.categories' | translate }}</a>
+                </li>
+                <li> <a class="block py-2 px-3 text-gray-600 rounded-sm md:p-1 hover:underline hover:underline-offset-[10px] transition"
+                        routerLink="brands" routerLinkActive="underline underline-offset-[10px] " aria-current="page">{{
+                        'navbar.brands' | translate }}</a>
+                </li>
+                <li> <a class="block py-2 px-3 text-gray-600 rounded-sm md:p-1 hover:underline hover:underline-offset-[10px] transition"
+                        routerLink="allorders" routerLinkActive="underline underline-offset-[10px] "
+                        aria-current="page">{{
+                        'navbar.allorders' | translate }}</a>
+                </li>}
+            </ul>
+            <ul
+                class="capitalize items-center font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 dark:border-gray-700">
+
+                <!-- English Button -->
+                <li [class.hidden]="currentLang('en')">
+                    <button (click)="changeLang('en')"
+                        class="cursor-pointer flex items-center gap-1 py-2 px-3 text-[16px] md:text-[18px] text-gray-600 hover:text-[#003F3F]">
+                        <i class="fa-solid fa-globe"></i>
+                        EN
+                    </button>
+                </li>
+
+                <!-- Arabic Button -->
+                <li [class.hidden]="currentLang('ar')">
+                    <button (click)="changeLang('ar')"
+                        class="cursor-pointer flex items-center gap-1 py-2 px-3 text-[16px] md:text-[18px] text-gray-600 hover:text-[#003F3F]">
+                        <i class="fa-solid fa-globe"></i>
+                        AR
+                    </button>
+                </li>
+
+
+                @if (IsLoggedIn()) {
+
+                <li> <a class="block mr-2 py-2 px-3 relative text-gray-600 text-xl rounded-sm md:p-1 hover:text-[#003F3F] transition"
+                        routerLink="wishlist" routerLinkActive="text-[#003F3F]" aria-current="page"><i
+                            class="fa-solid fa-heart"></i>
+                        <span
+                            class="inline-flex items-center rounded-md bg-green-100 px-2 py-1 text-xs font-medium text-[#003F3F] ring-1 ring-green-600/20 ring-inset absolute top-[-8px] right-[-10px]">{{numOfWishlistItems()}}</span>
+                    </a>
+                </li>
+                <li> <a class="block mr-2 py-2 px-3 relative text-gray-600 text-xl rounded-sm md:p-1 hover:text-[#003F3F] transition"
+                        routerLink="cart" routerLinkActive="text-[#003F3F]" aria-current="page"><i
+                            class="fas fa-shopping-cart"></i>
+                        <span
+                            class="inline-flex items-center rounded-md bg-green-100 px-2 py-1 text-xs font-medium text-[#003F3F] ring-1 ring-green-600/20 ring-inset absolute top-[-8px] right-[-10px]">{{numOfCartItems()}}</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="block py-2 px-3 text-gray-600 rounded-sm md:p-0 cursor-pointer hover:underline hover:underline-offset-[10px] transition"
+                        aria-current="page" (click)="signOut()">{{ 'navbar.signOut' | translate }}</a>
+                </li>}
+                @else {<li>
+                    <a class="block py-2 px-3 text-gray-600 rounded-sm md:p-1 cursor-pointer hover:underline hover:underline-offset-[10px] transition"
+                        routerLink="login" routerLinkActive="underline underline-offset-[10px]" aria-current="page">{{
+                        'navbar.login' | translate }}</a>
+                </li>
+                <li>
+                    <a class="block py-2 px-3 text-gray-600 rounded-sm md:p-1 cursor-pointer hover:underline hover:underline-offset-[10px] transition"
+                        routerLink="register" routerLinkActive="underline underline-offset-[10px]"
+                        aria-current="page">{{ 'navbar.register' | translate }}</a>
+                </li>}
+            </ul>
+        </div>
+    </div>
+</nav>

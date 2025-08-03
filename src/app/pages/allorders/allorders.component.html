@@ -1,0 +1,76 @@
+<h1 class="my-10 h-[50px] text-center text-4xl font-bold italic sp">
+    {{ 'orders.title' | translate }}
+</h1>
+
+@if (orders.length > 0) {<div class="p-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        @for (order of orders; track order._id) {
+        <div class="bg-white p-4 rounded-lg shadow-md space-y-4">
+            <div class="flex justify-between items-center">
+                <h2 class="text-lg font-bold text-[#003F3F]">
+                    {{ 'orders.orderId' | translate }}: {{ order.id }}
+                </h2>
+                <div class="flex gap-2">
+                    <span class="text-xs px-2 py-1 rounded-full font-medium" [ngClass]="{
+              'bg-green-100 text-green-600': order.isPaid,
+              'bg-orange-100 text-orange-500': !order.isPaid
+            }">
+                        {{ order.isPaid ? ('orders.paid' | translate) : ('orders.unpaid' | translate) }}
+                    </span>
+                    <span class="text-xs px-2 py-1 rounded-full bg-blue-100 text-blue-500 font-medium">
+                        {{ order.isDelivered ? ('orders.delivered' | translate) : ('orders.onDelivery' | translate) }}
+                    </span>
+                </div>
+            </div>
+
+            <p class="text-sm text-gray-500 italic">
+                {{ 'orders.date' | translate }}: {{ order.createdAt | date: 'mediumDate' }}
+            </p>
+
+            @for (item of order.cartItems; track item._id) {
+            <div class="flex items-center justify-between border border-gray-100 rounded-md p-2">
+                <div class="flex items-center gap-4">
+                    <img [src]="item.product.imageCover" alt="Product" class="w-16 h-16 object-cover rounded" />
+                    <h3 class="text-sm font-medium text-[#003F3F]">
+                        {{ item.product.title }}
+                    </h3>
+                </div>
+                <div class="text-right text-sm text-[#003F3F]">
+                    <p>{{ item.price }}EGP</p>
+                    <p class="text-sm text-gray-500">{{ 'orders.qty' | translate }}: {{ item.count }}</p>
+                </div>
+            </div>
+            }
+
+            <div class="grid grid-cols-2 gap-4 text-sm text-[#003F3F]">
+                <div class="bg-gray-50 rounded-lg p-3 space-y-1">
+                    <p><span class="font-semibold">{{ 'orders.mobile' | translate }}:</span> {{
+                        order.shippingAddress.phone }}</p>
+                    <p><span class="font-semibold">{{ 'orders.address' | translate }}:</span> {{
+                        order.shippingAddress.details }}</p>
+                    <p><span class="font-semibold">{{ 'orders.city' | translate }}:</span> {{ order.shippingAddress.city
+                        }}</p>
+                    <p><span class="font-semibold">{{ 'orders.country' | translate }}:</span> Egypt</p>
+                    <p><span class="font-semibold">{{ 'orders.payment' | translate }}:</span> {{ order.paymentMethodType
+                        }}</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-3 space-y-1">
+                    <p class="flex justify-between"><span>{{ 'orders.subtotal' | translate }}</span> <span>{{
+                            order.totalOrderPrice }}EGP</span></p>
+                    <p class="flex justify-between"><span>{{ 'orders.shipping' | translate }}</span> <span>{{
+                            order.shippingPrice }}EGP</span></p>
+                    <p class="flex justify-between"><span>{{ 'orders.tax' | translate }}</span> <span>{{ order.taxPrice
+                            }}EGP</span></p>
+                    <hr />
+                    <p class="flex justify-between font-semibold"><span>{{ 'orders.total' | translate }}</span> <span>{{
+                            order.totalOrderPrice }}EGP</span></p>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>}
+@else {<h3 class="text-2xl text-[#003F3F] text-center italic my-10 fade-in">
+    {{ 'orders.empty' | translate }}
+</h3>}

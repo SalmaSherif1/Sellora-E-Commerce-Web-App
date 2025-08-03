@@ -1,0 +1,94 @@
+<section class="w-3/4 md:w-1/2 bg-gray-100 shadow-lg rounded-lg mx-auto p-5 my-9">
+    <h1 class="text-center sp text-3xl font-bold italic my-4">
+        {{ 'register.title' | translate }}
+    </h1>
+
+    <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+
+        <div class="mb-6">
+            <label for="uName" class="block mb-2 text-md font-medium text-green-600">
+                {{ 'register.nameLabel' | translate }}
+            </label>
+            <input type="text" id="uName" formControlName="name"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5">
+            <app-form-alert [control]="registerForm.get('name')" [messages]="{
+        required: ('register.nameRequired' | translate),
+        minlength: ('register.nameMinlength' | translate),
+        maxlength: ('register.nameMaxlength' | translate)
+      }"></app-form-alert>
+        </div>
+
+        <div class="mb-6">
+            <label for="uEmail" class="block mb-2 text-md font-medium text-green-600">
+                {{ 'register.emailLabel' | translate }}
+            </label>
+            <input type="email" id="uEmail" formControlName="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5">
+            <app-form-alert [control]="registerForm.get('email')" [messages]="{
+        required: ('register.emailRequired' | translate),
+        email: ('register.emailInvalid' | translate)
+      }"></app-form-alert>
+        </div>
+
+        <div class="mb-6">
+            <label for="uPass" class="block mb-2 text-md font-medium text-green-600">
+                {{ 'register.passwordLabel' | translate }}
+            </label>
+            <input type="password" id="uPass" formControlName="password"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5">
+            <app-form-alert [control]="registerForm.get('password')" [messages]="{
+        required: ('register.passwordRequired' | translate),
+        pattern: ('register.passwordPattern' | translate)
+      }"></app-form-alert>
+        </div>
+
+        <div class="mb-6">
+            <label for="uRePass" class="block mb-2 text-md font-medium text-green-600">
+                {{ 'register.rePasswordLabel' | translate }}
+            </label>
+            <input type="password" id="uRePass" formControlName="rePassword"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5">
+            <app-form-alert [control]="registerForm.get('rePassword')" [parentForm]="registerForm"
+                [showIfFormErrorKey]="'mismatch'" [messages]="{
+        required: ('register.rePasswordRequired' | translate),
+        mismatch: ('register.rePasswordMismatch' | translate)
+      }"></app-form-alert>
+        </div>
+
+        <div class="mb-6">
+            <label for="uPhone" class="block mb-2 text-md font-medium text-green-600">
+                {{ 'register.phoneLabel' | translate }}
+            </label>
+            <input type="tel" id="uPhone" formControlName="phone"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5">
+            <app-form-alert [control]="registerForm.get('phone')" [messages]="{
+        required: ('register.phoneRequired' | translate),
+        pattern: ('register.phonePattern' | translate)
+      }"></app-form-alert>
+        </div>
+
+        @if (erorrmsg) {
+        <p
+            class="text-center p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
+            {{ erorrmsg }}
+        </p>
+        }
+
+        @if (successmsg) {
+        <p
+            class="text-center p-4 mb-4 mt-2 text-sm text-green-800 rounded-lg bg-green-200 dark:bg-gray-800 dark:text-green-400">
+            {{ successmsg }}
+        </p>
+        }
+
+        <div class="flex flex-col items-center gap-3">
+            <button [disabled]="isLoading"
+                class="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded-lg cursor-pointer transition text-left block disabled:bg-green-400 disabled:cursor-default">
+                {{ 'register.registerButton' | translate }}
+                @if (isLoading) {
+                <i class="fa-solid fa-spin fa-spinner"></i>
+                }
+            </button>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,123 @@
+<section>
+
+    <div class="flex flex-col lg:flex-row my-20 w-full">
+        <!-- Hero Image -->
+        <div class="flex-2 flex sm:my-6 justify-center items-center">
+            <img src="/images/hero33.png" alt="Hero Image"
+                class="w-full max-w-[300px] md:max-w-[600px] h-auto object-contain" />
+        </div>
+
+        <!-- Text Content -->
+        <div class="flex-1 flex my-7 flex-col justify-center px-10 items-center md:items-start ">
+            <h1 class="text-4xl md:text-5xl sp   font-semibold mb-6 animate__animated animate__bounce italic">
+                {{ 'product.Products' | translate }}
+            </h1>
+        </div>
+    </div>
+
+    <!-- Search -->
+    <input type="text" id="SearchInput" [(ngModel)]="searchInput"
+        [placeholder]="'product.searchPlaceholder' | translate"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#003F3F] block w-1/2 mx-auto my-6 p-2.5">
+
+    <!-- Sort -->
+    <div class="flex justify-end px-4 pb-4">
+        <select [(ngModel)]="sortDropdown"
+            class="border px-4 py-2 rounded-lg text-sm border-green-300 bg-gray-50 dark:bg-gray-200 text-[#003F3F] focus:ring-[#003F3F]">
+            <option value="">{{ 'product.sortBy' | translate }}</option>
+            <option value="priceLow">{{ 'product.sortPriceLow' | translate }}</option>
+            <option value="priceHigh">{{ 'product.sortPriceHigh' | translate }}</option>
+            <option value="nameAZ">{{ 'product.sortNameAZ' | translate }}</option>
+        </select>
+    </div>
+
+    @if (isLoading) {
+    <div class="text-center text-orange-700 dark:text-white py-10 text-lg font-semibold animate-pulse">
+        {{ 'product.loading' | translate }}
+    </div>
+    }
+    @else if (hasError) {
+    <div class="text-center text-red-500 py-10">
+        <p class="text-lg font-medium">{{ errorMessage }}</p>
+        <button (click)="callProduct()"
+            class="mt-4 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-700 transition">
+            {{ 'product.retry' | translate }}
+        </button>
+    </div>
+    }
+    @else {
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+        @for (prod of paginatedProducts | search : searchInput | sort:sortDropdown ; track prod._id) {
+        <div
+            class="group relative bg-white dark:bg-gray-400 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:shadow-gray-400 dark:shadow-gray-500 hover:shadow-2xl transition overflow-hidden flex flex-col justify-between">
+
+            <!-- Limited Stock Badge -->
+            @if (prod.quantity < 200) { <span
+                class="animate__animated animate__shakeX absolute top-3 left-3 bg-pink-500 text-white text-xs font-semibold px-2 py-1 rounded">
+                {{ 'product.limitedStock' | translate }}
+                </span>
+                }
+
+                <!-- Favorite Icon -->
+                <button (click)="toggleWishlist(prod._id)"
+                    [class]="'absolute cursor-pointer top-3 right-7 hover:text-red-500 dark:text-white ' + (wishlistProductIds.has(prod._id) ? 'text-red-500' : 'text-gray-400')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-5 fill-current" viewBox="0 0 20 20">
+                        <path
+                            d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 18.343l-6.828-6.829a4 4 0 010-5.656z" />
+                    </svg>
+                </button>
+
+
+                <!-- Zoom Icon -->
+                <button [routerLink]="['/details', prod.id]"
+                    class="absolute cursor-pointer top-15 right-3 w-12 h-12 bg-[#B2FCDE] dark:bg-gray-700 text-[#003F3F] dark:text-white rounded flex items-center justify-center hover:bg-green-400 dark:hover:bg-orange-500 transition-all duration-700">
+                    <i class="fa-solid fa-magnifying-glass-plus text-xs"></i>
+                </button>
+
+                <div class=" absolute flex items-center gap-0.5 bottom-3 right-3 ">
+                    <i class="fas fa-star text-yellow-300"></i>
+                    <span class="text-gray-500 dark:text-white">{{ prod.ratingsAverage }}</span>
+                </div>
+
+                <!-- Product Image -->
+                <img [src]="prod.imageCover" [alt]="prod.title" class="w-full h-52 object-contain p-4" />
+
+                <!-- Product Info -->
+                <div class="px-4 pt-2 pb-10 text-center relative">
+                    <h3 class="text-gray-900 dark:text-white font-semibold text-sm mt-2">{{ prod.title }}</h3>
+
+                    <div class="transition-all duration-300 mt-3 group-hover:opacity-0 group-hover:translate-y-2">
+                        <p class="text-gray-500 text-sm dark:text-gray-900 capitalize">{{ prod.category.name }}</p>
+                        <p class="text-lg font-semibold text-gray-900 dark:text-white mt-1">${{ prod.price }}</p>
+                    </div>
+
+                    <button (click)="addProductToCart(prod._id)"
+                        class="absolute left-1/2 cursor-pointer -translate-x-1/2 bottom-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700 bg-green-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium z-10 hover:bg-green-700">
+                        {{ 'product.addToCart' | translate }} • ${{ prod.price }}
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+        </div>
+        }
+    </div>
+    <!-- Pagination Controls -->
+    <div class="flex justify-center mt-8 gap-2 ">
+        <button class="px-4 py-2 bg-gray-200  rounded hover:bg-[#018a8a]  transition disabled:opacity-50"
+            (click)="goToPreviousPage()" [disabled]="currentPage === 1">
+            ‹ Prev
+        </button>
+
+        <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="changePage(i + 1)" [ngClass]="{
+          'bg-[#018a8a] text-white': currentPage === i + 1,
+          'bg-gray-200 text-gray-700': currentPage !== i + 1
+        }" class="px-4 py-2 rounded-md hover:bg-[#018a8a] transition font-semibold">
+            {{ i + 1 }}
+        </button>
+        <button class="px-4 py-2 bg-gray-200 rounded hover:bg-[#018a8a] transition disabled:opacity-50"
+            (click)="goToNextPage()" [disabled]="currentPage === totalPages">
+            Next ›
+        </button>
+    </div>
+
+    }
+</section>

@@ -1,0 +1,195 @@
+{
+  "navbar": {
+    "home": "Home",
+    "cart": "Cart",
+    "products": "Products",
+    "categories": "Categories",
+    "brands": "Brands",
+    "allorders": "My Orders",
+    "signOut": "Sign Out",
+    "login": "Login",
+    "register": "Register",
+    "openMenu": "Open main menu"
+  },
+  "home": {
+    "selloraTitle": "Sellora",
+    "description": "Discover the ultimate shopping experience with Sellora — your one-stop destination for stylish finds, everyday essentials, and exclusive deals. Whether you're browsing the latest trends or hunting for must-have products, Sellora makes it easy, fast, and fun to shop smarter.",
+    "shopNow": "Shop Now",
+    "popularCategories": "Popular Categories",
+    "popularProducts": "Popular Products",
+    "searchPlaceholder": "Search...",
+    "sortBy": "Sort By",
+    "sortPriceLow": "Price: Low to High",
+    "sortPriceHigh": "Price: High to Low",
+    "sortNameAZ": "Name: A–Z",
+    "loading": "Loading products...",
+    "retry": "Retry",
+    "limitedStock": "Limited Stock",
+    "addToCart": "Add to Cart",
+    "category": "Category"
+  },
+  "footer": {
+    "title": "Get The Online Shopping App",
+    "subtitle": "Enter your email, and we’ll send you a link to download our app on your phone.",
+    "emailPlaceholder": "Email..",
+    "shareLink": "Share App Link",
+    "paymentPartners": "Payment Partners:",
+    "quickLinks": {
+      "about": "About Us",
+      "contact": "Contact",
+      "privacy": "Privacy Policy",
+      "terms": "Terms",
+      "faqs": "FAQs",
+      "support": "Support"
+    },
+    "appLinks": "Get Our App:",
+    "followUs": "Follow us:",
+    "copyright": "© 2025 By Salma Sherif. All Rights Reserved."
+  },
+  "cart": {
+    "title": "Shop Cart",
+    "clear": "Clear Cart",
+    "table": {
+      "item": "Added Items",
+      "price": "Price",
+      "quantity": "Quantity",
+      "total": "Total"
+    },
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "shippingNote": "By flat Rate",
+    "grandTotal": "Grand Total",
+    "checkout": "Proceed to Checkout",
+    "empty": "Your cart is feeling lonely... 🛒 Add some products!"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "detailsLabel": "Details:",
+    "detailsPlaceholder": "Enter your details...",
+    "phoneLabel": "Phone:",
+    "phonePlaceholder": "Enter your phone...",
+    "cityLabel": "City:",
+    "cityPlaceholder": "Enter your city...",
+    "paymentMethodLabel": "Payment Method:",
+    "payNow": "Pay Now (Stripe)",
+    "cashOnDelivery": "Cash on Delivery",
+    "submit": "Submit"
+  },
+  "categories": {
+    "title": "Categories",
+    "backToCategories": "Back To Categories"
+  },
+  "brands": {
+    "title": "Brands",
+    "backToBrands": "Back To Brands"
+  },
+  "details": {
+    "loading": "Loading product details...",
+    "oops": "Oops! 😞",
+    "errorMessage": "An error occurred while loading the product.",
+    "retry": "Retry",
+    "breadcrumb": {
+      "Products": "Products"
+    },
+    "heading": "Product Details",
+    "limitedStock": "Limited Stock! Hurry Up",
+    "addToCart": "Add to Cart",
+    "addTowishlist": "Add to Wishlist",
+    "closeModal": "Close modal"
+  },
+  "wishlist": {
+    "title": "Your Wishlist",
+    "empty": "Your wishlist is currently empty.",
+    "table": {
+      "item": "Item",
+      "price": "Price",
+      "category": "Category",
+      "actions": "Actions"
+    },
+    "remove": "Remove",
+    "view": "View"
+  },
+  "login": {
+    "title": "Login Now:",
+    "emailLabel": "Email:",
+    "passwordLabel": "Password:",
+    "emailRequired": "Email is Required.",
+    "emailInvalid": "Invalid Email.",
+    "passwordRequired": "Password is Required.",
+    "passwordPattern": "Start with a capital letter, then at least 6 lowercase letters or digits.",
+    "loginButton": "Login",
+    "forgotPassword": "Forgot your password?",
+    "notHaveAcc": "Don't have an Account? Register Now"
+  },
+
+  "register": {
+    "title": "Register Now:",
+    "nameLabel": "Name:",
+    "emailLabel": "Email:",
+    "passwordLabel": "Password:",
+    "rePasswordLabel": "RePassword:",
+    "phoneLabel": "Phone:",
+    "nameRequired": "Name is Required.",
+    "nameMinlength": "Minimum 3 characters.",
+    "nameMaxlength": "Maximum 20 characters.",
+    "emailRequired": "Email is Required.",
+    "emailInvalid": "Invalid Email.",
+    "passwordRequired": "Password is Required.",
+    "passwordPattern": "Start with a capital letter, then at least 6 lowercase letters or digits.",
+    "rePasswordRequired": "RePassword is Required.",
+    "rePasswordMismatch": "Passwords do not match.",
+    "phoneRequired": "Phone is Required.",
+    "phonePattern": "Only Egyptian phone numbers are allowed.",
+    "registerButton": "Register"
+  },
+  "formAlert": {
+    "title": "Ensure that these requirements are met:",
+    "default": "Invalid input"
+  },
+  "forgetPass": {
+    "title": "Reset your Password",
+    "email": "Email",
+    "emailRequired": "Email is Required.",
+    "emailInvalid": "Invalid Email.",
+    "resetCode": "Reset Code",
+    "resetCodeRequired": "Reset Code is Required.",
+    "newPassword": "New Password",
+    "passwordRequired": "Password is Required.",
+    "passwordPattern": "Start with a capital letter, then at least 6 lowercase letters or digits.",
+    "submit": "Submit"
+  },
+  "product": {
+    "Products": "Products",
+    "searchPlaceholder": "Search for a product...",
+    "sortBy": "Sort by",
+    "sortPriceLow": "Price: Low to High",
+    "sortPriceHigh": "Price: High to Low",
+    "sortNameAZ": "Name: A to Z",
+    "loading": "Loading products...",
+    "retry": "Retry",
+    "limitedStock": "Limited Stock",
+    "addToCart": "Add to Cart",
+    "noProductsInThisCategory": "This category has no products yet.",
+    "noProductsInThisBrand": "This brand has no products yet."
+  },
+  "orders": {
+    "title": "Orders Details",
+    "orderId": "Order ID",
+    "paid": "Paid",
+    "unpaid": "Unpaid",
+    "delivered": "Delivered",
+    "onDelivery": "On Delivery",
+    "date": "Order Date",
+    "qty": "Qty",
+    "mobile": "Mobile",
+    "address": "Address",
+    "city": "City",
+    "country": "Country",
+    "payment": "Payment Method",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "tax": "Tax",
+    "total": "Total",
+    "empty": "You haven't placed any orders yet — your next favorite purchase is just a click away!"
+  }
+}

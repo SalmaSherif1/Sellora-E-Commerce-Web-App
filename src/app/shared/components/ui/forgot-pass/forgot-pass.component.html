@@ -1,0 +1,115 @@
+<section class="w-3/4 md:w-1/2 bg-gray-100 shadow-lg rounded-lg mx-auto p-5 my-7">
+    <h1 class="text-center sp text-3xl font-bold italic my-4">
+        {{ 'forgetPass.title' | translate }}
+    </h1>
+
+    @if (step == 1) {
+    <form [formGroup]="forgotPassForm" (ngSubmit)="forgetPass()">
+        <div class="mb-6">
+            <label for="uEmail" class="block mb-2 text-md font-medium text-green-600">
+                {{ 'forgetPass.email' | translate }}
+            </label>
+            <input type="email" id="uEmail" formControlName="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5">
+            <app-form-alert [control]="forgotPassForm.get('email')" [messages]="{
+          required: ('forgetPass.emailRequired' | translate),
+          email: ('forgetPass.emailInvalid' | translate)
+        }"></app-form-alert>
+        </div>
+
+        @if (erorrmsg) {
+        <p
+            class="text-center p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
+            {{ erorrmsg }}
+        </p>
+        }
+
+        <div class="flex flex-col items-center gap-3">
+            <button [disabled]="isLoading"
+                class="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded-lg cursor-pointer transition text-left block disabled:bg-green-400 disabled:cursor-default">
+                {{ 'forgetPass.submit' | translate }}
+                @if (isLoading) {
+                <i class="fa-solid fa-spin fa-spinner"></i>
+                }
+            </button>
+        </div>
+    </form>
+    }
+
+    @if (step == 2) {
+    <form [formGroup]="verifyCodeForm" (ngSubmit)="verifyCode()">
+        <div class="mb-6">
+            <label for="resetCode" class="block mb-2 text-md font-medium text-green-600">
+                {{ 'forgetPass.resetCode' | translate }}
+            </label>
+            <input type="text" id="resetCode" formControlName="resetCode"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5">
+            <app-form-alert [control]="verifyCodeForm.get('resetCode')" [messages]="{
+          required: ('forgetPass.resetCodeRequired' | translate)
+        }"></app-form-alert>
+        </div>
+
+        @if (erorrmsg) {
+        <p
+            class="text-center p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
+            {{ erorrmsg }}
+        </p>
+        }
+
+        <div class="flex flex-col items-center gap-3">
+            <button [disabled]="isLoading"
+                class="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded-lg cursor-pointer transition text-left block disabled:bg-green-400 disabled:cursor-default">
+                {{ 'forgetPass.submit' | translate }}
+                @if (isLoading) {
+                <i class="fa-solid fa-spin fa-spinner"></i>
+                }
+            </button>
+        </div>
+    </form>
+    }
+
+    @if (step == 3) {
+    <form [formGroup]="resetPassForm" (ngSubmit)="resetPass()">
+        <div class="mb-6">
+            <label for="UserEmail" class="block mb-2 text-md font-medium text-green-600">
+                {{ 'forgetPass.email' | translate }}
+            </label>
+            <input readonly type="email" id="UserEmail" formControlName="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5">
+            <app-form-alert [control]="resetPassForm.get('email')" [messages]="{
+          required: ('forgetPass.emailRequired' | translate),
+          email: ('forgetPass.emailInvalid' | translate)
+        }"></app-form-alert>
+        </div>
+
+        <div class="mb-6">
+            <label for="uPass" class="block mb-2 text-md font-medium text-green-600">
+                {{ 'forgetPass.newPassword' | translate }}
+            </label>
+            <input type="password" id="uPass" formControlName="newPassword"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5">
+            <app-form-alert [control]="resetPassForm.get('newPassword')" [messages]="{
+          required: ('forgetPass.passwordRequired' | translate),
+          pattern: ('forgetPass.passwordPattern' | translate)
+        }"></app-form-alert>
+        </div>
+
+        @if (erorrmsg) {
+        <p
+            class="text-center p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
+            {{ erorrmsg }}
+        </p>
+        }
+
+        <div class="flex flex-col items-center gap-3">
+            <button [disabled]="isLoading"
+                class="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded-lg cursor-pointer transition text-left block disabled:bg-green-400 disabled:cursor-default">
+                {{ 'forgetPass.submit' | translate }}
+                @if (isLoading) {
+                <i class="fa-solid fa-spin fa-spinner"></i>
+                }
+            </button>
+        </div>
+    </form>
+    }
+</section>
